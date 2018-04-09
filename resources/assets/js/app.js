@@ -56,7 +56,7 @@ const store = new Vuex.Store({
 
             state.messages.splice(state.messages.indexOf(message),1)
             message.read = !message.read
-            state.messages.push(message)
+            state.messages.unshift(message)
 
         },
         clear_all(state){

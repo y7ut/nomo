@@ -21,7 +21,7 @@
         name: 'done',
         computed: {
             notifies (){
-                return this.$store.getters.hasread.slice(0,8)
+                return this.$store.getters.hasread
             }
         }
     }

@@ -23,7 +23,8 @@ class NotifiesController extends Controller
 
             $message = User::find($userid)->notifies()->orderBy('created_at','desc')->get();
             $notify = collect($message)->map(function($item){
-                if($item->post_id==0){
+                $post = Post::find($item->post_id);
+                if(is_null($post)){
                     return [
                         'id'=>$item->id,
                         'content'=>$item->content,
@@ -32,7 +33,6 @@ class NotifiesController extends Controller
                         'created_at'=>$item->created_at
                     ];
                 }
-                $post = Post::find($item->post_id);
                 return [
                     'id'=>$item->id,
                     'content'=>$item->content,

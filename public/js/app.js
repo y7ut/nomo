@@ -11827,7 +11827,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
 
             state.messages.splice(state.messages.indexOf(message), 1);
             message.read = !message.read;
-            state.messages.push(message);
+            state.messages.unshift(message);
         },
         clear_all: function clear_all(state) {
             state.messages.filter(function (message) {
@@ -35205,7 +35205,7 @@ var microTimerFunc;
 var macroTimerFunc;
 var useMacroTask = false;
 
-// Determine (macro) Tasks defer implementation.
+// Determine (macro) Task defer implementation.
 // Technically setImmediate should be the ideal choice, but it's only available
 // in IE. The only polyfill that consistently queues the callback after all DOM
 // events triggered in the same loop is by using MessageChannel.
@@ -35252,7 +35252,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 
 /**
  * Wrap a function so that if any code inside triggers state change,
- * the changes are queued using a Tasks instead of a MicroTask.
+ * the changes are queued using a Task instead of a MicroTask.
  */
 function withMacroTask (fn) {
   return fn._withTask || (fn._withTask = function () {
@@ -45962,7 +45962,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'done',
     computed: {
         notifies: function notifies() {
-            return this.$store.getters.hasread.slice(0, 8);
+            return this.$store.getters.hasread;
         }
     }
 });
