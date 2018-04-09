@@ -25,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TaskUpdate' => [
             'App\Listeners\TaskUpdateListener',
         ],
+        'App\Events\TaskDel' => [
+            'App\Listeners\TaskDelListener',
+        ],
     ];
 
     /**

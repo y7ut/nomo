@@ -2,8 +2,7 @@
 
 namespace App\Events;
 
-use App\Tasks\EditPostAdminTask;
-use App\User;
+use App\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -12,23 +11,22 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TaskUpdate
+class TaskDel
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $task;
+    public $post;
 
     /**
      * Create a new event instance.
      *
-     * @param DailyTask $task
-     *
+     * @param Post $post
      */
-    public function __construct(EditPostAdminTask $task)
+    public function __construct(Post $post)
     {
         //
-
-        $this->task = $task;
+        $this->post = $post;
     }
+
     /**
      * Get the channels the event should broadcast on.
      *

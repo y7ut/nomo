@@ -2,12 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\TaskUpdate;
+use App\Events\TaskDel;
 use App\Notify;
+use App\Post;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TaskUpdateListener
+class TaskDelListener
 {
     /**
      * Create the event listener.
@@ -22,20 +23,22 @@ class TaskUpdateListener
     /**
      * Handle the event.
      *
-     * @param  TaskUpdate  $event
+     * @param  TaskDel  $event
      * @return void
      */
-    public function handle(TaskUpdate $event)
+    public function handle(TaskDel $event)
     {
         //
-        $user = $event->task->user();
-        $task = $event->task;
+        $user = $event->post->user;
+        $post = $event->post;
         $notify =new Notify();
-        $notify->content = '整改文章“'.$task->post()->title.'”成功。';
+        $notify->content = '文章“'.$post->title.'”未能及时整改，已经被系统删除。';
         $notify->user_id = $user->id;
-        $notify->post_id = $task->post()->id;
+        $notify->post_id = 0;
         $notify->read_status  = 0;
-        $notify->type  = 0;
+        $notify->type  = 1;
         $notify->save();
+//        $post->forceDelete();
+        Post::destroy($post->id);
     }
 }

@@ -62,6 +62,7 @@ Route::get('/setting/user','AuthController@authUsers');
 Route::post('/setting/user/{id}','AuthController@banUsers');
 Route::get('/setting/user/{id}/outban','AuthController@outBan');
 Route::get('/setting/post','AuthController@authPosts');
+Route::get('/setting/post/{id}/edit','AuthController@authPostsEdit');
 Route::post('/setting/notify','AuthController@authNotify');
 Route::get('/setting/board/{id}','AuthController@editBoard');
 Route::post('/setting/board','AuthController@storeBoard');
@@ -69,7 +70,9 @@ Route::patch('/setting/board/{id}','AuthController@updateBoard');
 Route::delete('/setting/board/{id}','AuthController@destroyBoard');
 
 Route::get('/test',function(){
-  dd(\App\Tasks\DailyTaskAboutComment::find(Auth::id())->updateProgress());
+    $test = 'Nomo:Task:Admin_post:2:28';
+    echo substr($test,23,2);
+
 });
 
 

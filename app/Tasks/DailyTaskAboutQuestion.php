@@ -76,9 +76,10 @@ class DailyTaskAboutQuestion extends DailyTask
             if($this->progress_number==$this->progress_size){
                 if($this->state!=1){
                     event(new TaskFinish($this,$this->user));
+                    $this->redis->hset('Nomo:Task:Daily_question:'.$this->user->id, 'task_state', 1);
                 }
                 $this->state=1;
-                $this->redis->hset('Nomo:Task:Daily_question:'.$this->user->id, 'task_state', 1);
+
             }
             $this->redis->hincrby('Nomo:Task:Daily_question:'.$this->user->id, 'task_progress_number', 1);
         }

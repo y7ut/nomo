@@ -46,8 +46,12 @@
                                             <td>{{$post->title}}</td>
                                             <td>{{$post->user->name}}</td>
                                             <td>{{$post->board->name}}</td>
+                                            @if($post->isNeedEdit())
+                                                <td>整改中</td>
+                                            @else
+                                                <td><a href="/setting/post/{{$post->id}}/edit"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></td>
 
-                                            <td><a><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a></td>
+                                            @endif
                                         </tr>
                                     @endforeach
 

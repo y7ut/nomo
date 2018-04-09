@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Scopes\UpdatedScope;
+use App\Tasks\EditPostAdminTask;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -168,5 +169,9 @@ class Post extends Model
         return Crypt::encrypt(str_random(10).Auth::id());
 
     }
-
+    public function isNeedEdit(){
+        if($task = EditPostAdminTask::find($this->id)){
+            return $task;
+        }
+    }
 }

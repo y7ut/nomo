@@ -40,6 +40,11 @@ class HomeController extends Controller
         $question = Post::where('comment_count',0)->where('posttype',1)
             ->inRandomOrder()
             ->first();
+        if(is_null($question)){
+            $question = Post::where('posttype',1)
+                ->inRandomOrder()
+                ->first();
+        }
         if(Auth::user()){
             $tasks = TaskBox::daily(Auth::user());
             return view('home',compact('boards','zeroPost','hotuser','question','tasks'));

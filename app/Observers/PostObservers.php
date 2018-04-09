@@ -9,10 +9,12 @@
 namespace App\Observers;
 
 
+use App\Events\TaskUpdate;
 use App\Notify;
 use App\Post;
 use App\Tasks\DailyTaskAboutPost;
 use App\Tasks\DailyTaskAboutQuestion;
+use App\Tasks\EditPostAdminTask;
 use Illuminate\Support\Facades\Auth;
 
 class PostObservers
@@ -26,7 +28,10 @@ class PostObservers
     public function updated(Post $post)
     {
         //
-
+        if($post->isNeedEdit()){
+            $task = EditPostAdminTask::find($post->id);
+            $task->updateStates();
+        }
         $attention = $post->attentionUser;
         $attention->map(function($user) use ($post){
             $notify =new Notify();

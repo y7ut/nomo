@@ -10,6 +10,7 @@ use App\Permission;
 use App\Post;
 use App\Role;
 use App\Tag;
+use App\Tasks\EditPostAdminTask;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -215,6 +216,31 @@ class AuthController extends Controller
         else{
             flash('出错了')->danger()->important();
             return Redirect::to('setting/user');
+        }
+    }
+    public function authPostsEdit($id){
+        if(Gate::allows('Admin')){
+            $posts = Post::all();
+        }else{
+            if(!Auth::user()->roleBoardId()){
+                return Redirect::to('/');
+            }
+            $board =Board::find(Auth::user()->roleBoardId());
+            $posts = $board->posts->get();
+        }
+        $post = Post::find($id);
+        if($posts->contains($post)){
+            if($post->isNeedEdit()){
+                flash('整改中..已通知')->error()->important();
+                return Redirect::to('setting/post');
+            }
+            EditPostAdminTask::create($post);
+            flash('已通知用户整改，三天后未修改则删除')->success()->important();
+            return Redirect::to('setting/post');
+        }
+        else{
+            flash('出错了')->danger()->important();
+            return Redirect::to('setting/post');
         }
     }
 }

@@ -33,8 +33,14 @@
 
                     @endcan
                     @cannot('showCharge',$post,Auth::user())
-                    <a href="/order/{{$post->createdAt()}}/{{$post->url}}/{{$post->orderToken()}}"
-                       class="btn btn-success">花费{{$post->integration_charge}}积分，立即购买</a>
+                    @if($post->isNeedEdit())
+                        <a href="#"
+                           class="btn btn-danger">整改中，无法购买</a>
+                        @else
+                        <a href="/order/{{$post->createdAt()}}/{{$post->url}}/{{$post->orderToken()}}"
+                           class="btn btn-success">花费{{$post->integration_charge}}积分，立即购买</a>
+                        @endif
+
                     @endcannot
 
                 @else
@@ -46,7 +52,9 @@
                 <div class="panel panel-default">
                     {{--<div class="panel-heading">{{$post->title}}</div>--}}
                     <div class="panel-body" style="overflow: auto">
-                        @if($post->isCharge())
+                        @if($post->isNeedEdit())
+                        根据相关法律规定文章违规，整改施工中.....
+                        @elseif($post->isCharge())
                             @can('showCharge',$post,Auth::user())
                             <h2 class="text-center">{{$post->title}}</h2>
                             {!! $post->content !!}
