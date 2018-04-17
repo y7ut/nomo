@@ -54,6 +54,20 @@ class PostController extends Controller
         return view('postedit');
     }
 
+    public function search(Request $request){
+        $this->validate($request, [
+            'content'=>'required|max:40',
+        ]);
+        $search = $request->input('content');
+        $posts = Post::where('title', 'like', '%'.$search.'%')
+            ->paginate(10);
+        $title =  '”'.$search.'“的搜索结果';
+        $smtitle =  '共'.$posts->count().'项';
+        $display = 1;
+        return view('postlist',compact('posts','title','smtitle','display'));
+
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -81,9 +95,14 @@ class PostController extends Controller
         $filename = \Auth::user()->id.'_'.time().$file->getClientOriginalName();
         $file->move($destinationPath,$filename);
         $post->background = '/'.$destinationPath.'/'.$filename;
-
+        $tags = collect($request->input('tag'))->map(function($tag){
+            if(is_numeric($tag)){
+                return $tag;
+            }
+            return Tag::firstOrCreate(['name'=>$tag],['created_id'=>Auth::id()])->id;
+        })->toArray();
         $post->save();
-        $post->tags()->attach($request->input('tag'));
+        $post->tags()->attach($tags);
         return redirect('/');
 
     }
@@ -321,6 +340,32 @@ class PostController extends Controller
             return redirect('/');
         }
     }
+    public function delPostReturn($id){
+            $user = Auth::user();
+            $post      = Post::withTrashed()
+                ->find($id);
+            if($user->can('editPost',$post)){
+                $userint   =$user->integration;
+                if ($userint < 100) {
+                    flash('积分不足')->warning()->important();
+                    return Redirect::back();
+                }else{
+                    $user->decrement('integration',100);
+                    $post->restore();
+                    $returnnotify =new Notify();
+                    $returnnotify->content = '你恢复了文章《'.$post->title.'》。积分-100';
+                    $returnnotify->user_id = $user->id;
+                    $returnnotify->post_id = 0;
+                    $returnnotify->read_status  = 0;
+                    $returnnotify->type  = 1;
+                    $returnnotify->save();
+                    flash('成功恢复！积分-100')->info()->important();
+                    return Redirect::back();
+                }
+            }
+        flash('出了点小问题')->error()->important();
+        return Redirect::back();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -356,9 +401,10 @@ class PostController extends Controller
 
         $posts = Post::where('user_id',$user->id)->paginate(10);
         $title =  $user->name.'的内容。';
-
-        $smtitle =  '关注了'.'板块';
+        $postdelete = Post::onlyTrashed()->get();
+        $smtitle =  '';
         $display  = 1;
-        return view('postlist',compact('posts','title','smtitle','display'));
+
+        return view('postlist',compact('posts','title','smtitle','display','postdelete'));
     }
 }

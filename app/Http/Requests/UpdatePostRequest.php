@@ -25,7 +25,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             //
-            'tag'=>'required',
             'content'=>'required',
         ];
     }

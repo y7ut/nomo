@@ -19,10 +19,10 @@
                             @endif
 
 
-                            <h2 style="color: #d9edf7">{{$title}}</h2>
+                            <h2 style="color: #ffffff">{{$title}}</h2>
 
 
-                            <p style="color: #d9edf7">{{$smtitle}}</p>
+                            <p style="color: #ffffff">{{$smtitle}}</p>
 
                             <a style="margin-right: 25px" class="btn btn-info " href="post/new" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  随笔感悟</a><a
                                     style="margin-right: 25px" class="btn btn-success" href="post/new?type=question" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>  技术答疑</a>

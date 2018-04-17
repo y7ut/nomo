@@ -75,8 +75,7 @@ class DailyTaskCommentAttention extends DailyTask
             $this->progress_number++;
             if($this->progress_number==$this->progress_size){
                 if($this->state!=1){
-                    event(new TaskFinish($this,$this->user));
-                    $this->redis->hset('Nomo:Task:Daily_attention:'.$this->user->id, 'task_state', 1);
+                  $this->updateState();
                 }
                 $this->state=1;
 
@@ -90,5 +89,10 @@ class DailyTaskCommentAttention extends DailyTask
     }
 
 
-
+    public function updateState()
+    {
+        // TODO: Implement updateState() method.
+        event(new TaskFinish($this,$this->user));
+        $this->redis->hset('Nomo:Task:Daily_attention:'.$this->user->id, 'task_state', 1);
+    }
 }

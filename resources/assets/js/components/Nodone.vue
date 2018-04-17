@@ -5,13 +5,10 @@
                 <button v-on:click="readit(index,nonotify)" type="button" class="close">
                     <span aria-hidden="true">×</span>
                 </button>
-
                     <a style="color:#33392b" v-on:click="readit(index,nonotify)" v-bind:href="nonotify.url">{{ nonotify.content }}</a>
                     <span style="color: #99cb84 "> | {{ nonotify.created_at }}</span>
-
             </button>
                 <a ><div v-if="shownextbutton" v-on:click="showAll" class="list-group-item-info text-center"><span class="glyphicon glyphicon-menu-down " aria-hidden="true"><strong>剩余{{cantsee}}条</strong></span></div></a>
-
             <button  class="list-group-item">
                 <button v-on:click="clearAll" class="btn btn-block btn-success"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  清除全部</button>
             </button>

@@ -75,8 +75,7 @@ class DailyTaskAboutPost extends DailyTask
             $this->progress_number++;
             if($this->progress_number==$this->progress_size){
                 if($this->state!=1){
-                   event(new TaskFinish($this,$this->user));
-                    $this->redis->hset('Nomo:Task:Daily_post:'.$this->user->id, 'task_state', 1);
+                    $this->updateState();
                 }
                 $this->state=1;
 
@@ -87,5 +86,12 @@ class DailyTaskAboutPost extends DailyTask
     }
     public function __call($method,$arg){
         return $this->$method;
+    }
+
+    public function updateState()
+    {
+        // TODO: Implement updateState() method.
+        event(new TaskFinish($this,$this->user));
+        $this->redis->hset('Nomo:Task:Daily_post:'.$this->user->id, 'task_state', 1);
     }
 }

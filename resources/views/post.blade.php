@@ -17,9 +17,9 @@
             <div class="col-md-12 jumbotron"
                  style="background-image: url({{$post->background}});background-size:100% auto ;">
 
-                <h2 style="color: #d9edf7">{{$post->title}}</h2>
+                <h2 style="color: #ffffff">{{$post->title}}</h2>
 
-                <p style="color: #d9edf7">{{$post->created_at}}</p>
+                <p style="color: #ffffff">{{$post->created_at}}</p>
 
                 <p style="color: #d9edf7">{{$post->user->name}}</p>
                 <button class="btn btn-{{array_rand(['success'=>'1','info'=>'2','danger'=>'3','warning'=>'4'])}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></button>
@@ -150,7 +150,11 @@
                                         </div>
                                         <div class="media-body">
                                             <div class="media-heading">{!! $comment->content !!}</div>
-                                            <div class="media-bottom"><span><strong>{{$comment->user->name}}</strong> 发表于 {{$comment->created_at}}</span>
+                                            <div class="media-bottom"><span><strong>{{$comment->user->name}}
+                                                        @if($comment->user == $post->user)
+                                                            (作者)
+                                                        @endif
+                                                    </strong> 发表于 {{$comment->created_at}}</span>
                                                 <button type="button"
                                                         class="btn btn-sm btn-{{array_rand(['success'=>'1','info'=>'2','danger'=>'3','warning'=>'4'])}}"
                                                         data-toggle="modal"
@@ -205,7 +209,9 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <p class="media-heading">{{$comment->content}}</p>
-                                                        <span><strong>{{$comment->user->name}}</strong> 发表于 {{$comment->created_at}}</span>
+                                                        <span><strong>{{$comment->user->name}}@if($comment->user == $post->user)
+                                                                    (作者)
+                                                                @endif</strong> 发表于 {{$comment->created_at}}</span>
                                                         <button type="button"
                                                                 class="btn btn-sm btn-{{array_rand(['success'=>'1','info'=>'2','danger'=>'3','warning'=>'4'])}}"
                                                                 data-toggle="modal"
@@ -260,7 +266,9 @@
                                                                 </div>
                                                                 <div class="media-body" style="word-wrap:break-word">
                                                                     <p class="media-heading">{{$comment->content}}</p>
-                                                                    <span><strong>{{$comment->user->name}}</strong> 发表于 {{$comment->created_at}}</span>
+                                                                    <span><strong>{{$comment->user->name}}@if($comment->user == $post->user)
+                                                                                (作者)
+                                                                            @endif</strong> 发表于 {{$comment->created_at}}</span>
 
                                                                 </div>
 

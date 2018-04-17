@@ -4,10 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="jumbotron"
-                 style="background-image: url(/storage/postimage/1_1522404163cee5c330e5_1392177830.jpg);background-size:100% auto ;">
-                <h2 style="color: #d9edf7">每天一点新感悟，立即浏览社区</h2>
+                 style="background-image: url({{$system->system_banner}});background-size:100% 100% ;">
+                {{--<h2 style="color: #d9edf7">{{$system->system_title}}</h2>--}}
+                <h2 style="color: #ffffff">{{$system->system_title}}</h2>
 
-                <p style="color: #d9edf7">{{date('Y.m.d')}}</p>
+                <p style="color: #ffffff">{{date('Y.m.d')}}</p>
+                {{--<p style="color: #d9edf7">{{date('Y.m.d')}}</p>--}}
 
                 <a style="margin-right: 25px" class="btn btn-info " href="post/new" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  随笔感悟</a><a
                         style="margin-right: 25px" class="btn btn-success" href="post/new?type=question" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>  技术答疑</a>
@@ -200,6 +202,21 @@
             </div>
 
             <div class="col-md-4" id="app">
+                <div class="panel panel-default">
+                    {!! Form::open(['url'=>'search/']) !!}
+                    <div class="panel-body">
+                        <div class="input-group">
+
+                            {!! Form::text('content',null,['class'=>'form-control']) !!}
+                            {{--<input type="text" class="form-control" placeholder="Search for...">--}}
+                             <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                            </span>
+
+                        </div><!-- /input-group -->
+                    </div>
+                    {!! Form::close() !!}
+                </div>
                 @guest
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">消息</div>

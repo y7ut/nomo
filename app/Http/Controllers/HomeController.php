@@ -8,6 +8,7 @@ use App\Tasks\TaskBox;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        $system = Db::table('system')->where('id', 1)->first();
         $boards  =  Board::orderBy('listnumber')
                     ->with('posts')
                     ->get();
@@ -47,9 +48,9 @@ class HomeController extends Controller
         }
         if(Auth::user()){
             $tasks = TaskBox::daily(Auth::user());
-            return view('home',compact('boards','zeroPost','hotuser','question','tasks'));
+            return view('home',compact('boards','zeroPost','hotuser','system','question','tasks'));
         }else{
-            return view('home',compact('boards','zeroPost','hotuser','question'));
+            return view('home',compact('boards','zeroPost','hotuser','system','question'));
         }
 
     }

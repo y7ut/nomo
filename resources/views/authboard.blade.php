@@ -18,7 +18,7 @@
                         <ul class="nav nav-pills  nav-stacked " role="tablist">
                             <li role="presentation" class="active"><a href="#board" aria-controls="board" role="tab" data-toggle="tab">板块列表</a></li>
                             <li role="presentation"><a href="#tag" aria-controls="tag" role="tab" data-toggle="tab">主题节点</a></li>
-                            <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">用户管理</a></li>
+                            <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">系统设置</a></li>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +124,10 @@
                                             <th scope="row">{{$loop->index+1}}</th>
                                             <td>{{$tag->name}}</td>
                                             <td>{{$tag->user->name}}</td>
-                                            <td><a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                            {!! Form::model($tag,['method'=>'DELETE','url'=>'/setting/tags/'.$tag->id]) !!}
+                                            <button id="btn_delete_{{$tag->id}}" style="display: none"  type="submit" >永久删除</button>
+                                            {!! Form::close() !!}
+                                            <td><a onclick='javascript:return del({{$tag->id}});'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -135,12 +138,42 @@
                     <div role="tabpanel" class="tab-pane" id="new">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                {!! Form::open(['url'=>'setting/system','files'=>true]) !!}
+                                <div class="form-group">
+                                    {!! Form::label('content','首页标题:') !!}
+                                    {!! Form::text('content',$system->system_title,['class'=>'form-control']) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('banner','首页图片:') !!}
+                                    <img class="media-object" alt="64X64" src="{{$system->system_banner}}"
+                                         style="width: 60%;height: 60%; overflow:hidden; display:inline; margin:5px 0 5px 5px  ;box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px; ">
+                                    {!! Form::file('banner',null,['class'=>'form-control']) !!}
+                                </div>
+                                <div class="btn-toolbar list-toolbar">
+                                    {!! Form::submit('立即发布',['class'=>'btn btn-success ']) !!}
+                                    <a href="/" data-toggle="modal" class="btn btn-danger">返回</a>
+                                </div>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+            @section('js')
+                    <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+
+                function del(tagid) {
+                    var msg = "确定要删除么？";
+                    if (confirm(msg)==true){
+                        document.getElementById("btn_delete_"+tagid).click();
+                    }else{
+                        return false;
+                    }
+                }
+            </script>
+            @endsection
         </div>
     </div>
 @endsection

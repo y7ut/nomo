@@ -33,7 +33,6 @@ class CreateUsersTable extends Migration
             $table->integer('signin_count')->default(0);
             $table->timestamp('lastsignin')->nullable();
             $table->smallInteger('is_active')->default(0);
-            $table->json('settings')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

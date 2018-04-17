@@ -22,10 +22,10 @@
             @endif
 
 
-                <h2 style="color: #d9edf7">{{$title}}</h2>
+                <h2 style="color: #ffffff">{{$title}}</h2>
 
 
-                <p style="color: #d9edf7">{{$smtitle}}</p>
+                <p style="color: #ffffff">{{$smtitle}}</p>
                     @if(!!!isset($display))
                     <a style="margin-right: 25px" class="btn btn-info " href="post/new" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>随笔感悟</a><a
                                 style="margin-right: 25px" class="btn btn-success" href="post/new?type=question" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>技术答疑</a>
@@ -85,8 +85,48 @@
 
             <div class="col-md-4" id="app">
                 <app></app>
+                @if(isset($postdelete))
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center"><h3 class="panel-title">回收站</h3></div>
 
+                        <div class="panel-body">
+                            <div class="list-group">
+                                @foreach($postdelete as $post)
+                                    <button type="button" class="list-group-item">
+                                        <a style="color:#33392b"
+                                           href="#">{{$post->title}}</a>
+
+                                        <span style="color: #99cb84 "> | {{$post->updated_at}}</span>
+                                        <div style="float: right;">
+
+                                            <a style="color: #a94442"  onclick='javascript:return del();' href="/post/delete/{{$post->id}}/return"><span  data-toggle="tooltip" data-placement="right" title="找回" class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
+                                            </a>
+                                        </div>
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
+            @section('js')
+                    <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                function F_Open_dialog()
+                {
+                    document.getElementById("btn_return").click();
+                }
+                function del() {
+                    var msg = "确定要找回么？需要100积分";
+                    if (confirm(msg)==true){
+                       return true;
+                    }else{
+                        return false;
+                    }
+                }
+
+            </script>
+            @endsection
         </div>
     </div>
 

@@ -11,5 +11,12 @@ namespace App\Tasks;
 
 interface Task
 {
-
+    /**
+     * 更新状态
+     */
+     public function updateProgress();
+    /**
+     * 查重
+     */
+     public function exists();
 }

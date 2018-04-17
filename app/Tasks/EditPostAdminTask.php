@@ -66,7 +66,7 @@ class EditPostAdminTask extends AdminTask
         $post_task->task_content=$post_task->redis->get('Nomo:Task:Admin_post:'.$post_task->user->id.':'.$post_task->post->id);
         return $post_task;
     }
-    public function updateStates()
+    public function updateProgress()
     {
         // TODO: Implement updateStates() method.
         //只做一次

@@ -30,7 +30,7 @@ class PostObservers
         //
         if($post->isNeedEdit()){
             $task = EditPostAdminTask::find($post->id);
-            $task->updateStates();
+            $task->updateProgress();
         }
         $attention = $post->attentionUser;
         $attention->map(function($user) use ($post){

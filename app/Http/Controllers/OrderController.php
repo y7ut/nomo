@@ -38,7 +38,7 @@ class OrderController extends Controller
                      ->first()
                      ->integration;
         if ($userint < $post->integration_charge) {
-            flash('积分不足 <a href="/intergation">立即获取</a>')->warning()->important();
+            flash('积分不足')->warning()->important();
             return Redirect::back();
         }
         //执行事务

@@ -24,9 +24,6 @@ abstract class DailyTask implements Task
     {
         $this->redis = app('redis.connection');
     }
-
-
-    abstract public function updateProgress();
-    abstract public function exists();
+    abstract public function updateState();
 
 }

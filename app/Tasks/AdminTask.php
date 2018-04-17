@@ -22,6 +22,4 @@ abstract class AdminTask implements Task
         $this->redis = app('redis.connection');
     }
 
-    abstract public function updateStates();
-    abstract public function exists();
 }

@@ -75,6 +75,7 @@
                                         @endif
 
                                     <li><a href="#">积分：<span style="color: #e95353"><span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {{ Auth::user()->integration }}</span></a>  </li>
+                                    <li><a href="setting/randpic"><span style="color: #b6a338" class="glyphicon glyphicon-fire" aria-hidden="true"></span>换一换</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

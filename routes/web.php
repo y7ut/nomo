@@ -40,6 +40,7 @@ Route::group(['prefix'=>'/post'],function(){
     Route::get('/{datetime}/{url}/opencomment/{token}', 'PostController@openComment');
     Route::get('/{datetime}/{url}/edit/{token}', 'PostController@edit');
     Route::get('/attentions', 'PostController@attentionShow');
+    Route::get('delete/{id}/return', 'PostController@delPostReturn');
     Route::get('/new', 'PostController@create');
     Route::post('/', 'PostController@store');
     Route::patch('/{id}', 'PostController@update');
@@ -50,6 +51,11 @@ Route::group(['prefix'=>'/post'],function(){
     Route::get('/attentionoff/{datetime}/{url}/{token}','PostController@offPost');
     Route::post('/{id}/comment/{father_id?}','CommentController@addComment');
 });
+
+
+Route::post('/search', 'PostController@search')->name('search');
+
+
 
 Route::get('/boards', 'BoardController@index')->name('board');
 Route::get('/board/{board_url}', 'BoardController@boardList');
@@ -66,8 +72,11 @@ Route::get('/setting/post/{id}/edit','AuthController@authPostsEdit');
 Route::post('/setting/notify','AuthController@authNotify');
 Route::get('/setting/board/{id}','AuthController@editBoard');
 Route::post('/setting/board','AuthController@storeBoard');
+Route::post('/setting/system','AuthController@systemSetting');
 Route::patch('/setting/board/{id}','AuthController@updateBoard');
 Route::delete('/setting/board/{id}','AuthController@destroyBoard');
+Route::delete('/setting/tags/{id}','AuthController@destroyTag');
+Route::get('setting/randpic','AuthController@randPic');
 
 Route::get('/test',function(){
     $test = 'Nomo:Task:Admin_post:2:28';
