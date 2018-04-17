@@ -27,7 +27,7 @@ class AuthController extends Controller
         if(Gate::denies('Admin')){
             return Redirect::to('/');
         }
-        $boards = Board::all();
+        $boards = Board::orderBy('listnumber')->get();
         $boards->first()->boardGod();
         $tags = Tag::all();
         $system = Db::table('system')->where('id', 1)->first();
@@ -87,6 +87,25 @@ class AuthController extends Controller
         $board = Board::find($id);
 
         return view('authboardedit',compact('board'));
+    }
+    public function editBoardUp($id){
+        if(Gate::denies('Admin')){
+            return Redirect::to('/');
+        }
+        try {
+
+            $board = Board::find($id);
+            $no = $board->listnumber;
+            Board::where('listnumber',$no-1)->increment('listnumber', 1);
+            $board->decrement('listnumber', 1);
+
+
+        } catch (QueryException $exception) {
+            flash('出错了')->error()->important();
+            return Redirect::back();
+        }
+        flash('修改位置成功')->success()->important();
+        return Redirect::to('setting/board');
     }
 
     public function randpic(){

@@ -85,16 +85,26 @@ class PostController extends Controller
         $post->user_id =Auth::id();
         $post->board_id =$request->input('board');
         $post->posttype =$request->input('type');
-        $post->url =$request->input('title');
+        $post->url =pinyin_abbr($request->input('title'));
         if($request->input('needintergation')=='on'){
             $post->charge ='1';
             $post->integration_charge =$request->input('intergation');
         }
-        $file = $request->file('background');
-        $destinationPath = 'storage/postimage';
-        $filename = \Auth::user()->id.'_'.time().$file->getClientOriginalName();
-        $file->move($destinationPath,$filename);
-        $post->background = '/'.$destinationPath.'/'.$filename;
+        if($request->file('background')){
+            $file = $request->file('background');
+            $destinationPath = 'storage/postimage';
+            $filename = \Auth::user()->id.'_'.time().$file->getClientOriginalName();
+            $file->move($destinationPath,$filename);
+            $post->background = '/'.$destinationPath.'/'.$filename;
+        }else{
+            $box=['1','5','6','c','d','7','0','2','3','4','a','b','8','9','e','f'];
+            $color=[];
+            for($i=1;$i<=6;$i++){
+                $color[$i]=array_random($box);
+            }
+            $color = '#'.implode($color);
+            $post->background = $color;
+        }
         $tags = collect($request->input('tag'))->map(function($tag){
             if(is_numeric($tag)){
                 return $tag;
@@ -103,7 +113,7 @@ class PostController extends Controller
         })->toArray();
         $post->save();
         $post->tags()->attach($tags);
-        return redirect('/');
+        return Redirect::to('post/'.$post->createdAt().'/'.$post->url);
 
     }
 
@@ -135,6 +145,38 @@ class PostController extends Controller
 
 
     }
+    public function newColor($datetime, $url, $token){
+        if (isset($token)) {
+            $tokenstr  = Crypt::decrypt($token);//解密Token
+            $user = User::find(substr($tokenstr, 10));
+            $post      = Post::where('url', $url)
+                ->whereDate('created_at', $datetime)
+                ->first();
+            if($user->can('editPost',$post)){
+                $box=['1','5','6','c','d','7','0','2','3','4','a','b','8','9','e','f'];
+                $color=[];
+                for($i=1;$i<=6;$i++){
+                    $color[$i]=array_random($box);
+                }
+                $color = '#'.implode($color);
+
+                try{
+
+                    $post->background=$color;
+                    $post->save();
+                }catch(QueryException $exception){
+                    flash('出错啦')->error()->important();
+                    return Redirect::back();
+                }
+                flash('更换成功')->info()->important();
+                return Redirect::back();
+
+            }
+        }
+        flash('出了点小问题')->error()->important();
+        return Redirect::back();
+    }
+
 
     /**
      * 关注文章
@@ -382,8 +424,16 @@ class PostController extends Controller
             return Redirect::back();
         }
 
-        $input = $request->input('tag');
+
+        $input = collect($request->input('tag'))->map(function($tag){
+            if(is_numeric($tag)){
+                return $tag;
+            }
+            return ''.Tag::firstOrCreate(['name'=>$tag],['created_id'=>Auth::id()])->id;
+        })->toArray();
+
         $now = collect($post->tags->pluck('id'))->toArray();
+
         $post->tags()->attach(collect($input)->diff($now));
         $post->tags()->detach(collect($now)->diff($input));
         $content = [

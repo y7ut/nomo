@@ -94,8 +94,11 @@
                                                  style="width: 128px;height: 72px; overflow:hidden; display:inline; margin:5px 0 5px 5px  ;box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px; ">
                                             {{--./{{substr_replace($board->banner,'',0,9)}}--}}
                                         </td>
-                                        <td><a  href="/setting/board/{{$board->id}}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a >
-
+                                        <td>
+                                            <a  href="/setting/board/{{$board->id}}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a >
+                                            @if($loop->index!=0)
+                                            <a  href="/setting/board/{{$board->id}}/up"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a >
+                                            @endif
 
                                         </td>
                                     </tr>

@@ -24,8 +24,8 @@
 
                             <p style="color: #ffffff">{{$smtitle}}</p>
 
-                            <a style="margin-right: 25px" class="btn btn-info " href="post/new" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  随笔感悟</a><a
-                                    style="margin-right: 25px" class="btn btn-success" href="post/new?type=question" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>  技术答疑</a>
+                            <a style="margin-right: 25px" class="btn btn-info " href="/post/new" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  随笔感悟</a><a
+                                    style="margin-right: 25px" class="btn btn-success" href="/post/new?type=question" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>  技术答疑</a>
 
                             @if($board->attentionUser->contains(Auth::user()))
                                 <a href="/board/{{$board->url}}/attentionoff" class="btn  btn-default"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>取消订阅</a>

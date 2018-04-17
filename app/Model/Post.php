@@ -174,4 +174,7 @@ class Post extends Model
             return $task;
         }
     }
+    public function isColorBackgrond(){
+        return substr($this->background,0,1)!='/';
+    }
 }

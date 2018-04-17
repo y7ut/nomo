@@ -183,7 +183,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
-
+        Overtrue\LaravelPinyin\ServiceProvider::class,
     ],
 
     /*
@@ -236,7 +236,7 @@ return [
         'Html'=>Collective\Html\HtmlFacade::class,
         'Form'=>Collective\Html\FormFacade::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
-
+        'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
     ],
 
 ];

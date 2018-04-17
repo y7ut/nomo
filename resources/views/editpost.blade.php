@@ -95,6 +95,7 @@
                     {{--});--}}
                     tagSelect.select2({
                         placeholder:'选择主题',
+                        tags: true,
                         ajax: {
                             url: "/select/tag",
                             dataType: 'json',

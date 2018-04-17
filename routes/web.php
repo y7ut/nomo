@@ -43,6 +43,7 @@ Route::group(['prefix'=>'/post'],function(){
     Route::get('delete/{id}/return', 'PostController@delPostReturn');
     Route::get('/new', 'PostController@create');
     Route::post('/', 'PostController@store');
+    Route::get('/color/{datetime}/{url}/{token}', 'PostController@newColor');
     Route::patch('/{id}', 'PostController@update');
     Route::get('/{token}', 'PostController@personalPost');
     Route::post('/{id}/delete', 'PostController@destroy');
@@ -71,6 +72,7 @@ Route::get('/setting/post','AuthController@authPosts');
 Route::get('/setting/post/{id}/edit','AuthController@authPostsEdit');
 Route::post('/setting/notify','AuthController@authNotify');
 Route::get('/setting/board/{id}','AuthController@editBoard');
+Route::get('/setting/board/{id}/up','AuthController@editBoardUp');
 Route::post('/setting/board','AuthController@storeBoard');
 Route::post('/setting/system','AuthController@systemSetting');
 Route::patch('/setting/board/{id}','AuthController@updateBoard');
@@ -79,8 +81,16 @@ Route::delete('/setting/tags/{id}','AuthController@destroyTag');
 Route::get('setting/randpic','AuthController@randPic');
 
 Route::get('/test',function(){
-    $test = 'Nomo:Task:Admin_post:2:28';
-    echo substr($test,23,2);
+    \App\Post::all()->map(function($item){
+        $box=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f'];
+        $color=[];
+        for($i=1;$i<=6;$i++){
+            $color[$i]=array_random($box);
+        }
+        $color = '#'.implode($color);
+        $item->background = $color;
+            $item->save();
+    });
 
 });
 

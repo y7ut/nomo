@@ -30,7 +30,7 @@ class NewPostRequest extends FormRequest
             'type'=>'required',
             'tag'=>'required',
             'content'=>'required',
-            'background'=>'required',
+            'background'=>'',
             'needintergation'=>'',
             'intergation'=>'',
         ];
