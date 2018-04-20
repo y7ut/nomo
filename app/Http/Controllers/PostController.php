@@ -68,16 +68,22 @@ class PostController extends Controller
 
 
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param NewPostRequest|Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(NewPostRequest $request)
     {
         //
 //        dd($request->all());
+        if($request->input('needintergation')=='on'
+            &&$request->input('intergation')>(Auth::user()->integration/10)){
+            flash('不要太贪心哦，设置积分不得超过'.Auth::user()->integration/10)->warning()->important();
+            return Redirect::back();
+        }
         $post = new Post();
         $post->title = $request->input('title');
         $post->content =$request->input('content');
@@ -113,6 +119,7 @@ class PostController extends Controller
         })->toArray();
         $post->save();
         $post->tags()->attach($tags);
+        flash('发布成功')->success()->important();
         return Redirect::to('post/'.$post->createdAt().'/'.$post->url);
 
     }
@@ -159,7 +166,6 @@ class PostController extends Controller
                     $color[$i]=array_random($box);
                 }
                 $color = '#'.implode($color);
-
                 try{
 
                     $post->background=$color;

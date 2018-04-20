@@ -65,7 +65,7 @@
                                     <span class="input-group-addon">
                                              <input type="checkbox" id="charge"  name='needintergation' >
                                      </span>
-                                    <input type="number" id="chargenum" name='intergation' class="form-control" placeholder='输入消耗积分'>
+                                    <input type="number" id="chargenum" name='intergation' min="1" max="20"  class="form-control" placeholder='输入消耗积分'>
                              </div><!-- /input-group -->
                               <span class="help-block">优选对积分有限制，积分大于100方可设置哦</span>
                                         @else
@@ -73,7 +73,7 @@
                                     <span class="input-group-addon">
                                              <input type="checkbox" id="charge" name='needintergation' >
                                      </span>
-                                    <input type="number" id="chargenum" name='integration' class="form-control" placeholder='输入消耗积分' disabled>
+                                    <input type="number"   id="chargenum"  name='integration' min="1" max="20" class="form-control" placeholder='输入消耗积分' disabled>
                              </div><!-- /input-group -->
                               <span class="help-block">优选对积分有限制，积分大于100方可设置哦</span>
                                         @endif

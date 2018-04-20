@@ -32,7 +32,7 @@ class NewPostRequest extends FormRequest
             'content'=>'required',
             'background'=>'',
             'needintergation'=>'',
-            'intergation'=>'',
+            'intergation'=>'numeric|between:1,30',
         ];
     }
 }

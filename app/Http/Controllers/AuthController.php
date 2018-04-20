@@ -35,26 +35,26 @@ class AuthController extends Controller
     }
     public function authUsers(){
         if(Gate::allows('Admin')){
-            $users = User::paginate(4);
+            $users = User::paginate(8);
         }else{
             if(!Auth::user()->roleBoardId()){
                 return Redirect::to('/');
             }
             $board =Board::find(Auth::user()->roleBoardId());
-            $users = $board->attentionUser()->paginate(4);
+            $users = $board->attentionUser()->paginate(8);
         }
         return view('authuser',compact('users'));
     }
     public function authPosts(){
 
         if(Gate::allows('Admin')){
-            $posts = Post::paginate(4);
+            $posts = Post::paginate(8);
         }else{
             if(!Auth::user()->roleBoardId()){
                 return Redirect::to('/');
             }
             $board =Board::find(Auth::user()->roleBoardId());
-            $posts = $board->posts()->paginate(4);
+            $posts = $board->posts()->paginate(8);
         }
         return view('authpost',compact('posts'));
     }
@@ -93,13 +93,10 @@ class AuthController extends Controller
             return Redirect::to('/');
         }
         try {
-
             $board = Board::find($id);
             $no = $board->listnumber;
             Board::where('listnumber',$no-1)->increment('listnumber', 1);
             $board->decrement('listnumber', 1);
-
-
         } catch (QueryException $exception) {
             flash('出错了')->error()->important();
             return Redirect::back();

@@ -40,9 +40,12 @@
                                     @foreach($posts as $post)
                                         <tr>
                                             <th scope="row">{{$loop->index+1}}</th>
-
-                                            <td><img class="media-object" alt="48X48" src="{{$post->background}}"
-                                                     style="width: 192px;height: 64px; overflow:hidden; display:inline; margin:5px 0 5px 5px  ;box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px; "></td>
+                                            @if($post->isColorBackgrond())
+                                                <td><div style="height: 64px;width: 192px;background-color:{{$post->background}} ;box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px; "></div></td>
+                                            @else
+                                                <td><img class="media-object" alt="48X48" src="{{$post->background}}"
+                                                         style="width: 192px;height: 64px; overflow:hidden; display:inline ;box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px; "></td>
+                                            @endif
                                             <td>{{$post->title}}</td>
                                             <td>{{$post->user->name}}</td>
                                             <td>{{$post->board->name}}</td>
