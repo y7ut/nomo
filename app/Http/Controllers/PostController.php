@@ -414,11 +414,12 @@ class PostController extends Controller
         flash('出了点小问题')->error()->important();
         return Redirect::back();
     }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdatePostRequest|Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePostRequest $request, $id)
@@ -457,7 +458,7 @@ class PostController extends Controller
 
         $posts = Post::where('user_id',$user->id)->paginate(10);
         $title =  $user->name.'的内容。';
-        $postdelete = Post::onlyTrashed()->get();
+        $postdelete = Post::onlyTrashed()->where('user_id','=',Auth::id())->get();
         $smtitle =  '';
         $display  = 1;
 

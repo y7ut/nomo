@@ -42,6 +42,7 @@ const store = new Vuex.Store({
         },
         canshownext:(state) => {
             if(state.messages.length==0){
+                console.log(state.messages.length);
                 return 0;
             }
             return state.page.now != state.page.all
