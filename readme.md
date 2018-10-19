@@ -1,4 +1,4 @@
 
 ## About Nomo
 
-Nomo is a web technical bbs application.
+Nomo is a web bbs application.
