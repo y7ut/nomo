@@ -270,8 +270,7 @@
                                         <img style="border-radius:50%;overflow:hidden; display:inline;height: 80px;width: 80px;  box-shadow:rgba(255,255,255,1) 0 0 0 2px, rgba(0,0,0,1) 0 0 2px 2px"
                                              src="{{Auth::user()->avatar}}">
 
-                                        <div class="row"><h3><span class="label label-info">{{Auth::user()->roles->first()->label}}</span></h3>
-                                        </div>
+                                        <div class="row"><h4>{{Auth::user()->name}}</h4><span class="label label-info">{{Auth::user()->roleBoardName()}}-管理</span></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

@@ -203,6 +203,15 @@ class User extends Authenticatable
         $roleid = substr($role,0,strpos($role,'-'));
         return $roleid;
     }
+    public function roleBoardName(){
+        if(is_null($this->roles->first())){
+            return 0;
+        }
+        $role = $this->roles->first()->name;
+        $roleid = substr($role,0,strpos($role,'-'));
+        $name = Board::find($roleid)->name;
+        return $name;
+    }
     /**
      * 获取用户关注文章。
      *
