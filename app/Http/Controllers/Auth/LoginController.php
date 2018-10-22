@@ -58,7 +58,8 @@ class LoginController extends Controller
             }else{
                 flash('欢迎回来  —— '.Auth::user()->name)->success()->important();
             }
-
+            Auth::user()->lastsignin = new Carbon();
+            Auth::user()->save();
             return $this->sendLoginResponse($request);
         }
 
@@ -72,8 +73,6 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        Auth::user()->lastsignin = Carbon::now();
-        Auth::user()->save();
         return $this->guard()->attempt(
             array_merge($this->credentials($request),['is_active' => 1]), $request->has('remember')
         );
