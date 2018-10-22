@@ -322,26 +322,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default corner-radius">
-                        <div class="panel-body text-center sidebar-sponsor-box">
-                            <a class="sidebar-sponsor-link" href="https://www.ucloud.cn/site/active/gift.html?utm_source=laravel-china&amp;utm_medium=content_pic_pc&amp;utm_campaign=multicloud&amp;utm_content=gift&amp;ytag=laravel-china" target="_blank">
-                                <img src="https://lccdn.phphub.org/uploads/images/201704/12/1/AAS9hrhk8K.jpg" class="popover-with-html" data-content="服务器赞助商：UCloud" width="100%" data-original-title="" title="">
-                            </a>
-                            <hr>
-                            <a class="sidebar-sponsor-link" href="https://www.upyun.com/solutions/wechat?utm_source=ruby&amp;utm_medium=Referral&amp;utm_content=ad" target="_blank">
-                                <img src="https://lccdn.phphub.org/uploads/banners/cgCJy4ShlSzY42cm2RBv.jpg" class="popover-with-html" data-content="Composer 镜像赞助商" width="100%" data-original-title="" title="">
-                            </a>
-                            <hr>
-                            <a class="sidebar-sponsor-link" href="https://www.yunpian.com/activity/wawi?utm_source=lavarel&amp;utm_campaign=kun" target="_blank">
-                                <img src="https://lccdn.phphub.org/uploads/banners/gXsUV2qlN1mP4SY2oFeZ.jpeg" class="popover-with-html" data-content="短信赞助商：云片" width="100%" data-original-title="" title="">
-                            </a>
-                            <hr>
-                            <a class="sidebar-sponsor-link" href="http://yousails.mikecrm.com/4Dh5uWU" target="_blank">
-                                <img src="https://lccdn.phphub.org/uploads/banners/doy57aKXkF6VH3cd3pFk.png" class="popover-with-html" data-content="优帆远扬技术外包" width="100%" data-original-title="" title="">
-                            </a>
-                            <hr>
-                        </div>
-                    </div>
             </div>
         </div>
     </div>
