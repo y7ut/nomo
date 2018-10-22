@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class EmailController extends Controller
         $user->confirmation_token = str_random(40);
         $user->lastsignin = Carbon::now();
         $user->save();
+        event(new NewUser($user));
         flash('邮箱验证成功')->success()->important();
         Auth::login($user);
 

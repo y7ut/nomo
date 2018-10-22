@@ -82,14 +82,14 @@
                                         根据相关法律规定文章违规，整改施工中.....
                                     @elseif($post->isCharge())
                                         @can('showCharge',$post,Auth::user())
-                                        <h2 class="text-center">{{$post->title}}</h2>
+
                                         {!! $post->content !!}
                                         @endcan
                                         @cannot('showCharge',$post,Auth::user())
                                         内容被隐藏啦
                                         @endcannot
                                     @else
-                                        <h2 class="text-center">{{$post->title}}</h2>
+
                                         {!! $post->content !!}
                                     @endif
                                 </div>
