@@ -191,9 +191,11 @@
 
                         <div class="panel panel-default">
                             <div class="panel-body">
-
+                                @if($question)
                                 <h4><strong>问：</strong>{{$question->title}}<span style=" float: right;color: #5ff4d2"><a href="/post/{{$question->createdAt()}}/{{$question->url}}"><span class="glyphicon glyphicon-saved" aria-hidden="true"></span></a></span></h4>
-
+                                @else
+                                <h4>等等吧</h4>
+                                @endif
                             </div>
                         </div>
                     </div>

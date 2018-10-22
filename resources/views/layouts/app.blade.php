@@ -106,12 +106,12 @@
 
                 <div class="col-sm-5 col-lg-5">
 
-                    <p class="padding-top-xsm">我们是高品质的开发者技术社区，致力于为学生提供一个分享创造、结识伙伴、协同互助的平台。</p>
+                    <p class="padding-top-xsm">真没啥想说的</p>
 
 
                     <br>
               <span style="font-size:0.9em">
-                  Designed by <span style="color: #e27575;font-size: 14px;">❤</span> <a href="https://github.com/y7ut" target="_blank" style="color:inherit">谢宇轩</a>
+                  Designed by <span style="color: #e27575;font-size: 14px;">❤</span> <a href="https://github.com/y7ut" target="_blank" style="color:inherit">谢易初</a>
               </span>
                 </div>
 
@@ -121,11 +121,7 @@
                         <div class="col-sm-4">
                             <h4>赞助商</h4>
                             <ul class="list-unstyled">
-                                <a href="http://www.ucloud.cn/?utm_source=zanzhu&amp;utm_campaign=phphub&amp;utm_medium=display&amp;utm_content=yejiao&amp;ytag=phphubyejiao" target="_blank"><img src="https://lccdn.phphub.org/uploads/banners/bQawWl3vT5dc2lYx5JZ7.png" class="popover-with-html footer-sponsor-link" width="98" data-placement="top" data-content="本站服务器由 UCloud 赞助" data-original-title="" title=""></a>
-                                <a href="http://www.qiniu.com/?utm_source=phphub" target="_blank"><img src="https://lccdn.phphub.org/uploads/banners/yGLIR0idW7zsInjsNmzr.png" class="popover-with-html footer-sponsor-link" width="98" data-placement="top" data-content="本站 CDN 服务由七牛赞助" data-original-title="" title=""></a>
-                                <a href="https://www.upyun.com/" target="_blank"><img src="https://lccdn.phphub.org/uploads/banners/XPtLlZmIN1cQbLuDFEON.png" class="popover-with-html footer-sponsor-link" width="98" data-placement="top" data-content="Composer 镜像赞助商" data-original-title="" title=""></a>
-                                <a href="http://www.sendcloud.net/" target="_blank"><img src="https://lccdn.phphub.org/uploads/banners/JpTCK6OKYBIrBIWdtob8.png" class="popover-with-html footer-sponsor-link" width="98" data-placement="top" data-content="订阅邮件赞助商：SendCloud" data-original-title="" title=""></a>
-                            </ul>
+                                <a href="#" target="_blank"><img src="/storage/boardimage/1_1540194571de51564a9291a4befd0f25e49e02cdb3.jpg" class="popover-with-html footer-sponsor-link" width="98" data-placement="top"  data-original-title="" title=""></a>
                         </div>
 
 
