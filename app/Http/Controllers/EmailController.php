@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -19,9 +20,11 @@ class EmailController extends Controller
         }
         $user->is_active = 1;
         $user->confirmation_token = str_random(40);
+        $user->lastsignin = Carbon::now();
         $user->save();
         flash('邮箱验证成功')->success()->important();
         Auth::login($user);
+
         return redirect('/');
     }
     public function remail($token){
