@@ -30,7 +30,7 @@ class DailyTaskAboutComment extends DailyTask
         }
         $second = \Carbon\Carbon::tomorrow()->timestamp-\Carbon\Carbon::now()->timestamp;
         $comment_task->progress_size=$progress_size;
-        $comment_task->task_content='发表'.$comment_task->progress_size.'个评论。';
+        $comment_task->task_content='别再继续自闭了，可以去发表'.$comment_task->progress_size.'个评论么';
         $comment_task->redis->hsetnx('Nomo:Task:Daily_comment:'.$comment_task->user->id,'task_user_id',$comment_task->user->id);
         $comment_task->redis->hsetnx('Nomo:Task:Daily_comment:'.$comment_task->user->id,'task_content',$comment_task->task_content);
         $comment_task->redis->hsetnx('Nomo:Task:Daily_comment:'.$comment_task->user->id,'task_progress_size',$comment_task->progress_size);

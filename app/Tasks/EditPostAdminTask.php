@@ -34,7 +34,7 @@ class EditPostAdminTask extends AdminTask
             $post_task=static::find($post->id);
             return $post_task;
         }
-        $post_task->task_content = "你好，".$post_task->user->name."你的文章“".$post_task->post->title."”内容违规请在三天内修改。否则将会被永久删除";
+        $post_task->task_content = "你好，".$post_task->user->name."你的文章“".$post_task->post->title."”内容违规请在三天内修改，已加入枪毙名单。";
         $second = \Carbon\Carbon::now()->addDays(3)->timestamp-\Carbon\Carbon::now()->timestamp;
         $post_task->redis->setnx('Nomo:Task:Admin_post:'.$post_task->user->id.':'.$post_task->post->id,$post_task->task_content);
         $post_task->redis->expire('Nomo:Task:Admin_post:'.$post_task->user->id.':'.$post_task->post->id, $second);

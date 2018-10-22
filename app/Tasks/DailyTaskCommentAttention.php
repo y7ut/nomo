@@ -30,7 +30,7 @@ class DailyTaskCommentAttention extends DailyTask
         }
         $second = \Carbon\Carbon::tomorrow()->timestamp-\Carbon\Carbon::now()->timestamp;
         $attention_task->progress_size=$progress_size;
-        $attention_task->task_content='关注'.$attention_task->progress_size.'个文章。';
+        $attention_task->task_content='你想开了吗，关注'.$attention_task->progress_size.'个文章吧。';
         $attention_task->redis->hsetnx('Nomo:Task:Daily_attention:'.$attention_task->user->id,'task_user_id',$attention_task->user->id);
         $attention_task->redis->hsetnx('Nomo:Task:Daily_attention:'.$attention_task->user->id,'task_content',$attention_task->task_content);
         $attention_task->redis->hsetnx('Nomo:Task:Daily_attention:'.$attention_task->user->id,'task_progress_size',$attention_task->progress_size);

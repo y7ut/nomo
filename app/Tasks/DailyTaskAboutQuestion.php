@@ -30,7 +30,7 @@ class DailyTaskAboutQuestion extends DailyTask
         }
         $second = \Carbon\Carbon::tomorrow()->timestamp-\Carbon\Carbon::now()->timestamp;
         $question_task->progress_size=$progress_size;
-        $question_task->task_content='提出'.$question_task->progress_size.'个问题。';
+        $question_task->task_content='你就真的不想问点什么嘛，赶紧去提出'.$question_task->progress_size.'个问题啊';
         $question_task->redis->hsetnx('Nomo:Task:Daily_question:'.$question_task->user->id,'task_user_id',$question_task->user->id);
         $question_task->redis->hsetnx('Nomo:Task:Daily_question:'.$question_task->user->id,'task_content',$question_task->task_content);
         $question_task->redis->hsetnx('Nomo:Task:Daily_question:'.$question_task->user->id,'task_progress_size',$question_task->progress_size);

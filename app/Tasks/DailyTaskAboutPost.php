@@ -30,7 +30,7 @@ class DailyTaskAboutPost extends DailyTask
         }
         $second = \Carbon\Carbon::tomorrow()->timestamp-\Carbon\Carbon::now()->timestamp;
         $post_task->progress_size=$progress_size;
-        $post_task->task_content='发表'.$post_task->progress_size.'个文章。';
+        $post_task->task_content='求求你了，我们网站没人气，帮忙发表'.$post_task->progress_size.'个文章吧。';
         $post_task->redis->hsetnx('Nomo:Task:Daily_post:'.$post_task->user->id,'task_user_id',$post_task->user->id);
         $post_task->redis->hsetnx('Nomo:Task:Daily_post:'.$post_task->user->id,'task_content',$post_task->task_content);
         $post_task->redis->hsetnx('Nomo:Task:Daily_post:'.$post_task->user->id,'task_progress_size',$post_task->progress_size);
