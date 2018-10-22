@@ -311,7 +311,7 @@ class AuthController extends Controller
         $title = $request->input('content');
         if($request->file('banner')){
             $file = $request->file('banner');
-            $destinationPath = 'storage/';
+            $destinationPath = 'storage';
             $filename = \Auth::user()->id.'_'.time().$file->getClientOriginalName();
             $file->move($destinationPath,$filename);
             $banner = '/'.$destinationPath.'/'.$filename;
