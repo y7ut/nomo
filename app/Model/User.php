@@ -192,7 +192,7 @@ class User extends Authenticatable
             return 0;
         }
         $role = $this->roles->first()->name;
-        $rolename = substr($role,2);
+        $rolename = substr($role,strpos($role,'-')+1);
         return $rolename=='boardgod';
     }
     public function roleBoardId(){
@@ -200,7 +200,7 @@ class User extends Authenticatable
             return 0;
         }
         $role = $this->roles->first()->name;
-        $roleid = substr($role,0,1);
+        $roleid = substr($role,0,strpos($role,'-'));
         return $roleid;
     }
     /**
