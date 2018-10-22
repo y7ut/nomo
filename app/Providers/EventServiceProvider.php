@@ -28,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TaskDel' => [
             'App\Listeners\TaskDelListener',
         ],
+        'App\Events\NewUser' =>[
+            'App\Listeners\NewUserListener',
+        ]
     ];
 
     /**

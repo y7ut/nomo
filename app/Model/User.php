@@ -73,6 +73,21 @@ class User extends Authenticatable
         return Carbon::parse($value)->diffForHumans();
     }
     /**
+     * 获取用户登录的时间，默认100天前输出完整时间，否则输出人性化的时间。
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getLastSignInAttribute($value)
+    {
+
+        if (Carbon::now() > Carbon::parse($value)->addDays(100)) {
+            return Carbon::parse($value)->toFormattedDateString();
+        }
+
+        return Carbon::parse($value)->diffForHumans();
+    }
+    /**
      * 找回密码发送邮件。
      *
      * @param Object $token
@@ -100,6 +115,17 @@ class User extends Authenticatable
         $userid = $this->id;
         $date = date('Y-m-d');
         return DB::table('sign')->where([['user_id','=',$userid],['date','=',$date]])->first();
+    }
+    /**
+     * 获取用户消息。
+     *
+     * @param
+     * @return object
+     */
+    public function signCount()
+    {
+        $userid = $this->id;
+        return DB::table('sign')->where([['user_id','=',$userid]])->count();
     }
 
     /**

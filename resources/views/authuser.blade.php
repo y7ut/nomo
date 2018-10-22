@@ -34,6 +34,8 @@
                                         <th>用户名</th>
                                         <th>邮箱</th>
                                         <th>积分</th>
+                                        <th>累计签到天数</th>
+                                        <th>上次登录</th>
                                         <th>封禁状态</th>
                                     </tr>
                                     </thead>
@@ -47,12 +49,13 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->integration}}</td>
+                                            <td>累计签到过{{$user->signCount()}}天</td>
+                                            <td>{{$user->lastsignin}}</td>
                                             <button type="button"
                                                     id="button_ban_{{$user->id}}"
                                                     style="display: none"
                                                     data-toggle="modal"
                                                     data-target="#myModalmyModal{{$user->id}}">
-                                                回复
                                             </button>
                                             <div class="modal fade" id="myModalmyModal{{$user->id}}" tabindex="-1"
                                                  role="dialog" aria-labelledby="myModalLabelmyModal{{$user->id}}">
