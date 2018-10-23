@@ -26,8 +26,7 @@
                     <div class="panel-body">
                         <!-- 编辑器容器 -->
                         <div class="form-group">
-                            <script id="container" name="content" type="text/plain">{!! $post->content !!}</script>
-
+                            <textarea name="content" id="editor">{{$post->content}}</textarea>
                         </div>
                         <div class="form-group">
                             {!! Form::label('tag_list','主题') !!}
@@ -68,31 +67,8 @@
                     <!-- 实例化编辑器 -->
             <script type="text/javascript">
 
-                var ue = UE.getEditor('container');
-                ue.ready(function () {
-                    ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-                });
-
                 $(document).ready(function () {
                     var tagSelect = $('.tag');
-                    {{--$.ajax({--}}
-                        {{--type: 'GET',--}}
-                        {{--url: '/select/tag/' + '{{$post->id}}',--}}
-                        {{----}}
-                    {{--}).then(function (data) {--}}
-                        {{----}}
-                        {{--// create the option and append to Select2--}}
-                        {{--var option = new Option(data.name, data.id, true, true);--}}
-                        {{--tagSelect.append(option).trigger('change');--}}
-
-                        {{--// manually trigger the `select2:select` event--}}
-                        {{--tagSelect.trigger({--}}
-                            {{--type: 'select2:select',--}}
-                            {{--params: {--}}
-                                {{--data: data--}}
-                            {{--}--}}
-                        {{--});--}}
-                    {{--});--}}
                     tagSelect.select2({
                         placeholder:'选择主题',
                         tags: true,
@@ -114,9 +90,7 @@
                             cache: true
                         }
                     });
-
                 });
-
             </script>
             @endsection
         </div>

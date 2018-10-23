@@ -21,7 +21,7 @@ class NotifiesController extends Controller
     {
 
 
-            $message = User::find($userid)->notifies()->orderBy('created_at','desc')->get();
+            $message = User::find($userid)->notifies()->show()->orderBy('created_at','desc')->get();
             $notify = collect($message)->map(function($item){
                 $post = Post::find($item->post_id);
                 if(is_null($post)){

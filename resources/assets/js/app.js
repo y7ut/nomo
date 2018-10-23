@@ -20,10 +20,140 @@ import Vuex from 'vuex'
 //import router from './routes'
 import Notify from './components/Notify'
 
+import SimpleMDE from 'simplemde'
+
 //Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.component('app',Notify);
+// Most options demonstrate the non-default behavior
+var simplemdenew = new SimpleMDE({
+    autofocus: true,
+    autosave: {
+        enabled: true,
+        uniqueId: "MD1",
+        delay: 1000,
+    },
+    blockStyles: {
+        bold: "__",
+        italic: "_"
+    },
+    element: document.getElementById("neweditor"),
+    forceSync: true,
+    indentWithTabs: false,
+    insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
+    },
+    lineWrapping: false,
+    parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: false,
+        underscoresBreakWords: true,
+    },
+    placeholder: "语法自己看一下...",
+    /* previewRender: function(plainText) {
+     console.log(plainText)
+     return customMarkdownParser(plainText); // Returns HTML from a custom parser
+     },
+     previewRender: function(plainText, preview) { // Async method
+     setTimeout(function(){
+     preview.innerHTML = customMarkdownParser(plainText);
+     }, 250);
 
+     return "Loading...";
+     },*/
+    promptURLs: true,
+    renderingConfig: {
+        singleLineBreaks: false,
+        codeSyntaxHighlighting: true,
+    },
+    shortcuts: {
+        drawTable: "Cmd-Alt-T"
+    },
+    showIcons: ["code", "table"],
+    spellChecker: false,
+    status: false,
+    status: ["autosave", "lines", "words", "cursor"], // Optional usage
+    status: ["autosave", "lines", "words", "cursor", {
+        className: "keystrokes",
+        defaultValue: function(el) {
+            this.keystrokes = 0;
+            el.innerHTML = "0 Keystrokes";
+        },
+        onUpdate: function(el) {
+            el.innerHTML = ++this.keystrokes + " Keystrokes";
+        }
+    }], // Another optional usage, with a custom status bar item that counts keystrokes
+    styleSelectedText: true,
+    tabSize: 4,
+    //toolbar: flase,
+    //toolbarTips: false,
+});
+var simplemde = new SimpleMDE({
+    autofocus: true,
+    autosave: {
+        enabled: false,
+    },
+    blockStyles: {
+        bold: "__",
+        italic: "_"
+    },
+    element: document.getElementById("editor"),
+    forceSync: true,
+    indentWithTabs: false,
+    insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
+    },
+    lineWrapping: false,
+    parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: false,
+        underscoresBreakWords: true,
+    },
+    placeholder: "语法自己看一下...",
+    /* previewRender: function(plainText) {
+     console.log(plainText)
+     return customMarkdownParser(plainText); // Returns HTML from a custom parser
+     },
+     previewRender: function(plainText, preview) { // Async method
+     setTimeout(function(){
+     preview.innerHTML = customMarkdownParser(plainText);
+     }, 250);
+
+     return "Loading...";
+     },*/
+    promptURLs: true,
+    renderingConfig: {
+        singleLineBreaks: false,
+        codeSyntaxHighlighting: true,
+    },
+    shortcuts: {
+        drawTable: "Cmd-Alt-T"
+    },
+    showIcons: ["code", "table"],
+    spellChecker: false,
+    status: false,
+    status: ["autosave", "lines", "words", "cursor"], // Optional usage
+    status: ["autosave", "lines", "words", "cursor", {
+        className: "keystrokes",
+        defaultValue: function(el) {
+            this.keystrokes = 0;
+            el.innerHTML = "0 Keystrokes";
+        },
+        onUpdate: function(el) {
+            el.innerHTML = ++this.keystrokes + " Keystrokes";
+        }
+    }], // Another optional usage, with a custom status bar item that counts keystrokes
+    styleSelectedText: true,
+    tabSize: 4,
+    //toolbar: flase,
+    //toolbarTips: false,
+});
 const store = new Vuex.Store({
     state: {
         messages:[],
@@ -42,8 +172,7 @@ const store = new Vuex.Store({
         },
         canshownext:(state) => {
             if(state.messages.length==0){
-                console.log(state.messages.length);
-                return 0;
+                return false;
             }
             return state.page.now != state.page.all
         }
@@ -64,6 +193,7 @@ const store = new Vuex.Store({
             state.messages.filter(message => !message.read).map(message=> message.read = !message.read)
         },
         get_page_list(state,pagenum){
+            if(pagenum!=0)
             state.page.all =pagenum
         },
         show_all(state){

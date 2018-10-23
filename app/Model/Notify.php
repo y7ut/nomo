@@ -38,4 +38,7 @@ class Notify extends Model
 
         return Carbon::parse($value)->diffForHumans();
     }
+    public function scopeShow($query){
+        return $query->where([['read_status','1'],['created_at','>',Carbon::now()->subWeek()]])->orWhere('read_status','0');
+    }
 }

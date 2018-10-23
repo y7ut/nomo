@@ -8,9 +8,8 @@
                 <span style="color: #99cb84 "> | {{ notify.created_at }}</span>
 
             </button>
-            <a href="/notifies/history"  ><div class="list-group-item-info text-center"><strong>...</strong></div></a>
+            <div class="list-group-item-info text-center"><strong>已读消息仅保存一周</strong></div>
             <button  class="list-group-item">
-                <a href="/notifies/history" class="btn btn-block btn-info ">历史消息</a>
             </button>
         </div>
     </div>

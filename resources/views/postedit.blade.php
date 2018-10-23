@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('vendor.ueditor.assets')
     <div class="container">
         <div class="row">
             {!! Form::open(['url'=>'post','files'=>true]) !!}
@@ -39,8 +38,7 @@
                         </div>
                         <!-- 编辑器容器 -->
                         <div class="form-group">
-                            <script id="container" name="content" type="text/plain"></script>
-
+                            <textarea name="content" rows="" cols="" id="neweditor"></textarea>
                         </div>
                         <div class="form-group">
                             {!! Form::label('tag_list','主题') !!}
@@ -122,11 +120,6 @@
                         return null;
                     }
                 }
-                var ue = UE.getEditor('container');
-                ue.ready(function () {
-                    ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-                });
-
                 $(document).ready(function () {
 
                         $('.tag').select2({

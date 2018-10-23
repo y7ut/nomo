@@ -77,20 +77,20 @@
 
                             <div class="panel panel-default">
                                 {{--<div class="panel-heading">{{$post->title}}</div>--}}
-                                <div class="panel-body" style="overflow: auto">
+                                <div class="panel-body markdown" style="overflow: auto">
                                     @if($post->isNeedEdit())
                                         根据相关法律规定文章违规，整改施工中.....
                                     @elseif($post->isCharge())
                                         @can('showCharge',$post,Auth::user())
 
-                                        {!! $post->content !!}
+                                        {!! $html !!}
                                         @endcan
                                         @cannot('showCharge',$post,Auth::user())
                                         内容被隐藏啦
                                         @endcannot
                                     @else
 
-                                        {!! $post->content !!}
+                                        {!! $html !!}
                                     @endif
                                 </div>
                             </div>
@@ -511,10 +511,12 @@
 
                                 </div>
                             </div>
+
                         </div>
                         @endcannot
 
                         <app></app>
+
                 </div>
         </div>
 

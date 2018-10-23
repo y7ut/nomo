@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\Attention;
 use App\Http\Requests\NewPostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Markdown\Markdown;
 use App\Notify;
 use App\Post;
 use App\Tag;
@@ -25,6 +26,11 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
+    public function __construct(Markdown $markdown)
+    {
+        $this->markdown = $markdown;
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -136,9 +142,10 @@ class PostController extends Controller
         $datetime = substr_replace(substr_replace($datetime,'-',4,0),'-',7,0);
         $post = Post::where('url',$url)->whereDate('created_at', $datetime)->first();
         $title = $post->title;
+        $html = $this->markdown->markdown($post->content);
         if($post->isCharge()){
             if(Auth::check()){
-                return view('post',compact('post','title'));
+                return view('post',compact('post','title','html'));
             }
             flash('登陆后才可查看优选内容哦')->warning()->important();
             return redirect('/');
@@ -147,7 +154,7 @@ class PostController extends Controller
             if(!Auth::check()){
                 flash('登陆后浏览更方便哦')->success()->important();
             }
-            return view('post',compact('post','title'));
+            return view('post',compact('post','title','html'));
         }
 
 
