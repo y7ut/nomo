@@ -21,7 +21,7 @@
 </head>
 <body>
     <div>
-        <nav class="navbar navbar-default navbar-static-top" style=" z-index:-1;">
+        <nav class="navbar navbar-default navbar-static-top" style=" z-index:1;">
             <div  class="container">
                 <div class="navbar-header">
 
