@@ -3,7 +3,6 @@
 @section('content')
     <a name="top" id="top"></a>
 
-    @include('vendor.ueditor.assets')
     <div class="container">
         <div class="row">
             <ol class="breadcrumb">
@@ -163,7 +162,7 @@
 
                                         <div class="panel-body">
 
-                                            @if(count($post->comments)==0)
+                                            @if(count($comments)==0)
                                                 <div class="alert alert-success alert-dismissible fade in" role="alert">
                                                     <button type="button" class="close" data-dismiss="alert"
                                                             aria-label="Close">
@@ -171,7 +170,7 @@
                                                     <strong>暂无评论，快来抢沙发~获得双倍积分</strong>
                                                 </div>
                                             @endif
-                                            @foreach($post->comments as $comment)
+                                            @foreach($comments as $comment)
                                                 <hr>
                                                 <div class="media">
                                                     <div class="media-left" style="margin: 15px 15px">
@@ -353,9 +352,7 @@
                                                     {!! Form::open(['url'=>'/post/'.$post->id.'/comment']) !!}
                                                             <!-- 编辑器容器 -->
                                                     <div class="form-group">
-                                                        <script id="container" name="content"
-                                                                type="text/plain"></script>
-
+                                                        <textarea name="content" id="editorcomment"></textarea>
                                                     </div>
                                                     <div class="btn-toolbar list-toolbar">
                                                         {!! Form::submit('立即发布',['class'=>'btn btn-success ']) !!}
@@ -397,9 +394,7 @@
                                                     {!! Form::open(['url'=>'/post/'.$post->id.'/comment']) !!}
                                                             <!-- 编辑器容器 -->
                                                     <div class="form-group">
-                                                        <script id="container" name="content"
-                                                                type="text/plain"></script>
-
+                                                        <textarea name="content" id="editorcomment"></textarea>
                                                     </div>
                                                     <div class="btn-toolbar list-toolbar">
                                                         {!! Form::submit('立即发布',['class'=>'btn btn-success ']) !!}
@@ -521,14 +516,6 @@
         </div>
 
     </div>
-    <script type="text/javascript">
-        var ue = UE.getEditor('container', {
-            maximumWords: 100,
-        });
-        ue.ready(function () {
-            //关闭字数统计
-
-            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
-        });
-    </script>
+    <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 @endsection

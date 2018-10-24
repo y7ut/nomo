@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('vendor.ueditor.assets')
     <div class="container">
         <div class="row">
             <ol class="breadcrumb">
@@ -66,7 +65,6 @@
             @section('js')
                     <!-- 实例化编辑器 -->
             <script type="text/javascript">
-
                 $(document).ready(function () {
                     var tagSelect = $('.tag');
                     tagSelect.select2({
@@ -82,7 +80,6 @@
                                 };
                             },
                             processResults: function (data) {
-                                console.log(data)
                                 return {
                                     results: data
                                 };
@@ -90,7 +87,9 @@
                             cache: true
                         }
                     });
+
                 });
+
             </script>
             @endsection
         </div>

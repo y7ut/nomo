@@ -24809,7 +24809,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Notify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Notify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_simplemde__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_simplemde___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_simplemde__);
-var _ref, _ref2;
+var _ref, _ref2, _ref3;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -24954,6 +24954,61 @@ var simplemde = new __WEBPACK_IMPORTED_MODULE_2_simplemde___default.a((_ref2 = {
         el.innerHTML = ++this.keystrokes + " Keystrokes";
     }
 }]), _defineProperty(_ref2, 'styleSelectedText', true), _defineProperty(_ref2, 'tabSize', 4), _ref2));
+var simplemdecomment = new __WEBPACK_IMPORTED_MODULE_2_simplemde___default.a((_ref3 = {
+    autosave: {
+        enabled: false
+    },
+    blockStyles: {
+        bold: "__",
+        italic: "_"
+    },
+    element: document.getElementById("editorcomment"),
+    forceSync: true,
+    indentWithTabs: false,
+    insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"]
+    },
+    lineWrapping: false,
+    parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: false,
+        underscoresBreakWords: true
+    },
+    placeholder: "语法自己看一下...",
+    /* previewRender: function(plainText) {
+     console.log(plainText)
+     return customMarkdownParser(plainText); // Returns HTML from a custom parser
+     },
+     previewRender: function(plainText, preview) { // Async method
+     setTimeout(function(){
+     preview.innerHTML = customMarkdownParser(plainText);
+     }, 250);
+       return "Loading...";
+     },*/
+    promptURLs: true,
+    renderingConfig: {
+        singleLineBreaks: false,
+        codeSyntaxHighlighting: true
+    },
+    shortcuts: {
+        drawTable: "Cmd-Alt-T"
+    },
+    showIcons: ["code", "table"],
+    spellChecker: false,
+    status: false
+}, _defineProperty(_ref3, 'status', ["autosave", "lines", "words", "cursor"]), _defineProperty(_ref3, 'status', ["autosave", "lines", "words", "cursor", {
+    className: "keystrokes",
+    defaultValue: function defaultValue(el) {
+        this.keystrokes = 0;
+        el.innerHTML = "0 Keystrokes";
+    },
+    onUpdate: function onUpdate(el) {
+        el.innerHTML = ++this.keystrokes + " Keystrokes";
+    }
+}]), _defineProperty(_ref3, 'styleSelectedText', true), _defineProperty(_ref3, 'tabSize', 4), _ref3));
 var store = new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
     state: {
         messages: [],

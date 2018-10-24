@@ -143,9 +143,13 @@ class PostController extends Controller
         $post = Post::where('url',$url)->whereDate('created_at', $datetime)->first();
         $title = $post->title;
         $html = $this->markdown->markdown($post->content);
+        $comments = collect($post->comments)->map(function($item){
+            $item->content = $this->markdown->markdown($item->content);
+            return $item;
+        });
         if($post->isCharge()){
             if(Auth::check()){
-                return view('post',compact('post','title','html'));
+                return view('post',compact('post','title','html','comments'));
             }
             flash('登陆后才可查看优选内容哦')->warning()->important();
             return redirect('/');
@@ -154,7 +158,7 @@ class PostController extends Controller
             if(!Auth::check()){
                 flash('登陆后浏览更方便哦')->success()->important();
             }
-            return view('post',compact('post','title','html'));
+            return view('post',compact('post','title','html','comments'));
         }
 
 

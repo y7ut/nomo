@@ -197,7 +197,6 @@
                         $('#chargenum').attr('disabled',true);
                     }
                 });
-
             </script>
             @endsection
         </div>

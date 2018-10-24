@@ -154,6 +154,68 @@ var simplemde = new SimpleMDE({
     //toolbar: flase,
     //toolbarTips: false,
 });
+var simplemdecomment = new SimpleMDE({
+    autosave: {
+        enabled: false,
+    },
+    blockStyles: {
+        bold: "__",
+        italic: "_"
+    },
+    element: document.getElementById("editorcomment"),
+    forceSync: true,
+    indentWithTabs: false,
+    insertTexts: {
+        horizontalRule: ["", "\n\n-----\n\n"],
+        image: ["![](http://", ")"],
+        link: ["[", "](http://)"],
+        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
+    },
+    lineWrapping: false,
+    parsingConfig: {
+        allowAtxHeaderWithoutSpace: true,
+        strikethrough: false,
+        underscoresBreakWords: true,
+    },
+    placeholder: "语法自己看一下...",
+    /* previewRender: function(plainText) {
+     console.log(plainText)
+     return customMarkdownParser(plainText); // Returns HTML from a custom parser
+     },
+     previewRender: function(plainText, preview) { // Async method
+     setTimeout(function(){
+     preview.innerHTML = customMarkdownParser(plainText);
+     }, 250);
+
+     return "Loading...";
+     },*/
+    promptURLs: true,
+    renderingConfig: {
+        singleLineBreaks: false,
+        codeSyntaxHighlighting: true,
+    },
+    shortcuts: {
+        drawTable: "Cmd-Alt-T"
+    },
+    showIcons: ["code", "table"],
+    spellChecker: false,
+    status: false,
+    status: ["autosave", "lines", "words", "cursor"], // Optional usage
+    status: ["autosave", "lines", "words", "cursor", {
+        className: "keystrokes",
+        defaultValue: function(el) {
+            this.keystrokes = 0;
+            el.innerHTML = "0 Keystrokes";
+        },
+        onUpdate: function(el) {
+            el.innerHTML = ++this.keystrokes + " Keystrokes";
+        }
+    }], // Another optional usage, with a custom status bar item that counts keystrokes
+    styleSelectedText: true,
+    tabSize: 4,
+    //toolbar: flase,
+    //toolbarTips: false,
+});
 const store = new Vuex.Store({
     state: {
         messages:[],

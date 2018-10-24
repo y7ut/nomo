@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('vendor.ueditor.assets')
+
     <div class="container">
         <div class="row">
             <ol class="breadcrumb">
